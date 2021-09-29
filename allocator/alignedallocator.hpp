@@ -48,7 +48,7 @@ public:
     GenericAlignedAllocator() = default;
     GenericAlignedAllocator(const GenericAlignedAllocator&)    noexcept = default;
     template<class U>
-    GenericAlignedAllocator(const GenericAlignedAllocator<U>&) noexcept {};
+    GenericAlignedAllocator(const GenericAlignedAllocator<U>&) noexcept {}
     GenericAlignedAllocator& operator=(const GenericAlignedAllocator&) noexcept = default;
 
 

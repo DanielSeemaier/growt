@@ -15,7 +15,7 @@ namespace debug = utils_tm::debug_tm;
 
 #ifndef ICPC
 #include <xmmintrin.h>
-using int128_t = __int128;
+__extension__ using int128_t = __int128;
 #else
 using int128_t = __int128_t;
 #endif
