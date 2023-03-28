@@ -9,8 +9,7 @@
 #
 # All rights reserved. Published under the BSD-2 license in the LICENSE file.
 ################################################################################
-
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.0)
 
 # custom cmake scripts
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/misc/cmake)
@@ -121,12 +120,13 @@ set_target_properties(range_example PROPERTIES COMPILE_FLAGS "${FLAGS}")
 target_link_libraries(range_example ${TEST_DEP_LIBRARIES})
 
 
+# !DISABLED!
 # if necessary find tbb
 # if (USE_TBB_MEMPOOL OR GROWT_BUILD_TBB)
-find_package(TBB)
+#find_package(TBB)
 
 if (NOT TBB_FOUND)
-  message("Intel TBB not found. "
+  message(STATUS "Intel TBB not found. "
     "memPool cannot be used and TBB-Tests cannot be created!")
   set(GROWT_BUILD_TBB OFF)
   if (USE_TBB_MEMPOOL)
@@ -134,7 +134,7 @@ if (NOT TBB_FOUND)
     set(GROWT_ALLOCATOR ALIGNED)
   endif()
 elseif(TBB_INTERFACE_VERSION LESS 8000)
-  message("Intel TBB ${TBB_INTERFACE_VERSION} is too old. "
+  message(STATUS "Intel TBB ${TBB_INTERFACE_VERSION} is too old. "
     "ThreadPool cannot be used and TBB-Tests cannot be created!")
   set(GROWT_BUILD_TBB OFF)
   if (USE_TBB_MEMPOOL)
@@ -150,7 +150,6 @@ else()
 endif()
 # endif()
 
-
 if (GROWT_ALLOCATOR STREQUAL NUMA_POOL)
   find_package(NUMA)
   if (NOT NUMA_FOUND)
@@ -164,7 +163,6 @@ if (GROWT_ALLOCATOR STREQUAL NUMA_POOL)
     set(ALLOC_LIB ${ALLOC_LIB} ${NUMA_LIBRARIES})
   endif()
 endif()
-
 
 ##### SUBMODULE FINDS ##########################################################
 
@@ -230,7 +228,6 @@ if (GROWT_BUILD_FOLLY)
     set(GROWT_BUILD_FOLLY OFF)
   endif()
 endif()
-
 
 if ((GROWT_HASHFCT STREQUAL XXHASH) OR
     (GROWT_HASHFCT STREQUAL XXH3))
