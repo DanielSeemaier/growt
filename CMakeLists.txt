@@ -291,6 +291,7 @@ function( GrowXExecutable variant cpp directory name )
   target_link_libraries(${name} ${TEST_DEP_LIBRARIES} ${ALLOC_LIB})
 endfunction( GrowXExecutable )
 
+if (OFF)
 GrowTExecutable( UAGROW functionality fun functionality_uaGrowT )
 GrowTExecutable( USGROW functionality fun functionality_usGrowT )
 GrowTExecutable( PAGROW functionality fun functionality_paGrowT )
@@ -331,6 +332,7 @@ GrowTExecutable( PSGROW agg_test agg agg_full_psGrowT )
 
 GrowTExecutable( FOLKLORE ins32_test  ins32  ins32_none_folklore )
 GrowTExecutable( UAGROW   ins32_test  ins32  ins32_full_uaGrowT )
+endif ()
 
 
 if (GROWT_BUILD_MEMORY_TEST)
@@ -342,7 +344,7 @@ if (GROWT_BUILD_MEMORY_TEST)
   target_compile_definitions(mem_full_usGrowT PRIVATE -D GROWT_RSS_MODE)
 endif()
 
-
+if (OFF)
 add_custom_target( folklore )
 add_dependencies( folklore
   ins_none_folklore mix_none_folklore con_none_folklore
@@ -412,6 +414,7 @@ add_custom_target( del )
 add_dependencies( del
   del_full_uaGrowT    del_full_usGrowT
   del_full_uaGrowT    del_full_usGrowT)
+endif ()
 
 if (TBB_FOUND)
   GrowTExecutable( FOLKLORE text_test text text_none_folklore )
